@@ -2,16 +2,14 @@
 
 > Parses the resource strings used by Kubernetes (K8s) to indidcate memory and cpu requests and limits.
 
-Zero dependencies!
-
-State: No error handling, so only use when you expect correct strings (i.e. coming directly from the K8s API)
+Only use when you expect correct strings (e.g. coming directly from the K8s API), as the parser isn't designed to handle maliciously-crafted inputs.
 
 Example:
 
 ```js
-cpuParser('300m') // Returns 0.3
-memoryParser('2K') // Returns 2000
-memoryParser('2Ki') // Returns 2048
+cpuParser("300m"); // Returns 0.3
+memoryParser("2K"); // Returns 2000
+memoryParser("2Ki"); // Returns 2048
 ```
 
 For the full usage, simply run the unit tests which also acts as usage instructions, here's a snapshot of the output:
