@@ -1,10 +1,20 @@
-function cpuParser(input) {
-  const milliMatch = input.match(/^([0-9]+)m$/);
-  if (milliMatch) {
-    return milliMatch[1] / 1000;
-  }
+const nearley = require("nearley");
+const grammar = require("./quantity_grammar.js");
 
-  return parseFloat(input);
+function cpuParser(input) {
+  try {
+    const parser = new nearley.Parser(nearley.Grammar.fromCompiled(grammar));
+    parser.feed(input);
+    const [{ number, unit }] = parser.results;
+
+    if (unit === "m") {
+      return number / 1000;
+    }
+
+    return number;
+  } catch (e) {
+    throw new SyntaxError("Invalid quanity provided.");
+  }
 }
 
 const memoryMultipliers = {
@@ -23,12 +33,15 @@ const memoryMultipliers = {
 };
 
 function memoryParser(input) {
-  const unitMatch = input.match(/^([0-9]+)([A-Za-z]{1,2})$/);
-  if (unitMatch) {
-    return parseInt(unitMatch[1], 10) * memoryMultipliers[unitMatch[2]];
-  }
+  try {
+    const parser = new nearley.Parser(nearley.Grammar.fromCompiled(grammar));
+    parser.feed(input);
+    const [{ number, unit }] = parser.results;
 
-  return parseInt(input, 10);
+    return unit ? number * memoryMultipliers[unit] : number;
+  } catch (e) {
+    throw new SyntaxError("Invalid quanity provided.");
+  }
 }
 
 module.exports = {

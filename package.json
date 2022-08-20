@@ -1,12 +1,13 @@
 {
-  "name": "kubernetes-resource-parser",
+  "name": "k8s-resource-parser",
   "version": "0.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "jest",
     "lint": "eslint **/*.js",
-    "ci": "npm run lint && npm run test"
+    "ci": "npm run lint && npm run test",
+    "build": "nearleyc quantity.ne -o quantity_grammar.js"
   },
   "repository": {
     "type": "git",
@@ -20,10 +21,10 @@
   "homepage": "https://github.com/etiennedi/kubernetes-resource-parser#readme",
   "devDependencies": {
     "eslint": "^4.15.0",
-    "eslint-config-airbnb": "^16.1.0",
-    "eslint-plugin-import": "^2.8.0",
-    "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-react": "^7.5.1",
-    "jest": "^22.0.4"
+    "jest": "^28.1.3",
+    "prettier": "^2.7.1"
+  },
+  "dependencies": {
+    "nearley": "^2.20.1"
   }
 }
