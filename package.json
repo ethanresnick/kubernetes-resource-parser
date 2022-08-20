@@ -1,8 +1,9 @@
 {
   "name": "k8s-resource-parser",
-  "version": "0.1.0",
+  "version": "0.2.1",
   "description": "",
   "main": "index.js",
+  "typings": "index.d.ts",
   "scripts": {
     "test": "jest",
     "lint": "eslint **/*.js",
