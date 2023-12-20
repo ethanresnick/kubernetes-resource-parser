@@ -14,7 +14,7 @@ describe("a cpu parser", () => {
   tests.map((t) =>
     it(`${t[0]} (${t[1]} to ${t[2]})`, () => {
       expect(cpuParser(t[1])).toEqual(t[2]);
-    })
+    }),
   );
 });
 
@@ -43,7 +43,7 @@ describe("a memory parser", () => {
   tests.map((t) =>
     it(`${t[0]} (${t[1]} to ${t[2]})`, () => {
       expect(memoryParser(t[1])).toEqual(t[2]);
-    })
+    }),
   );
 
   it("should throw on invalid strings", () => {

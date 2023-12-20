@@ -7,12 +7,22 @@
 # Cf. https://en.wikipedia.org/wiki/Earley_parser
 #
 # I'm pretty sure nearely is not the most-appropriate or performant parsing
-# algorithm to use (esp since our grammar shouldn't be ambiguous), but, for
+# algorithm to use (esp. since our grammar shouldn't be ambiguous), but, for
 # strings this short, it really shouldn't matter. We're mostly using a grammar
 # for correctness anyway, and nearley made the grammar easy to write.
 #
 # This does mean, though, that you probably shouldn't run the parser on
 # uncontrolled user inupt, to avoid any sort of DOS attack.
+#
+# NB: kubernetes apparently (per above link) always stores the quantity as an
+# (integer, unit) pair to avoid floating point precision issues, which requires
+# rounding or truncating some values; we don't bother with this, meaning results
+# may not _perfectly_ match kubernetes.
+#
+# NB: Kubernetes also seems to have a different concept called an "amount",
+# which uses other possible units (e.g., `n`) and supports more precision, and
+# is used in metrics APIs and such. See
+# https://github.com/kubernetes/apimachinery/blob/e2f405af78de67e27b5dd5ceb1a3eca76331e4d5/pkg/api/resource/amount.go
 
 QUANTITY -> SIGNED_NUMBER UNIT  {% (data) => {
 		const [number, unit] = data;
