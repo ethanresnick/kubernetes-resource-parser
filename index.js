@@ -33,6 +33,7 @@ function parseQuantity(input) {
 }
 
 module.exports = {
+  parseQuantity,
   cpuParser: parseQuantity,
   memoryParser: parseQuantity,
 };
